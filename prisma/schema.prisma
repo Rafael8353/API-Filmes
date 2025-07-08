@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id       Int      @id @default(autoincrement())
+  nome     String
+  email    String   @unique
+  senha    String
+  perfil   Perfil   @default(COMUM)
+  filmes   Filme[]
+}
+
+
+model Filme {
+  id        Int      @id @default(autoincrement())
+  titulo    String
+  genero    String
+  ano       Int
+  usuarioId Int
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id])
+
+  @@map("filmes")
+}
+
+
+enum Perfil {
+  ADMIN
+  COMUM
+}
