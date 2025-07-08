@@ -1,70 +1,152 @@
-README.md
-markdown
+🎜️ API de Filmes Favoritos
 
-# API Filmes Favoritos
+API RESTful para gerenciamento de usuários e seus filmes favoritos, desenvolvida com Node.js, TypeScript, Express, JWT, Prisma e SQLite.
 
-API RESTful para gerenciar usuários e filmes favoritos, desenvolvida em Node.js com TypeScript, Express e Prisma.
 
-## Funcionalidades
+---
 
-- Registro e autenticação de usuários (JWT)
-- Controle de acesso por perfil (admin e comum)
-- CRUD completo para usuários e filmes
-- Validação de dados com Zod
-- Banco de dados SQLite via Prisma
+🚀 Funcionalidades
 
-## Tecnologias
+Autenticação com JWT;
 
-- Node.js
-- TypeScript
-- Express
-- Prisma (SQLite)
-- Zod
-- bcryptjs
-- jsonwebtoken
+Registro e login de usuários;
 
-## Instalação
+Perfis de acesso: ADMIN e COMUM;
 
-1. Clone o repositório:
+CRUD completo de filmes, vinculado ao usuário;
 
-```bash
-git clone https://github.com/seuusuario/api-filmes.git
-cd api-filmes
-Instale as dependências:
+Usuários só podem acessar seus próprios filmes;
 
-bash
-Copiar código
+Usuários ADMIN podem gerenciar todos os usuários;
+
+Validação de dados com Zod;
+
+Banco de dados SQLite com ORM Prisma.
+
+
+
+---
+
+📁 Tecnologias
+
+Node.js
+
+TypeScript
+
+Express
+
+Prisma (ORM)
+
+SQLite
+
+JWT (JSON Web Token)
+
+Zod (validação)
+
+dotenv (variáveis de ambiente)
+
+
+
+---
+
+⚙️ Instalação e execução
+
+1. Clone o projeto:
+
+git clone https://github.com/seu-usuario/seu-repositorio.git
+cd seu-repositorio
+
+2. Instale as dependências:
+
 npm install
-Configure as variáveis de ambiente
 
-Crie um arquivo .env na raiz e defina:
+3. Configure as variáveis de ambiente:
 
-env
-Copiar código
+Crie um arquivo .env na raiz do projeto:
+
+JWT_SECRET=sua_chave_secreta
 DATABASE_URL="file:./dev.db"
-JWT_SECRET="sua_chave_secreta_aqui"
-PORT=3000
-Gere o banco de dados com Prisma:
 
-bash
-Copiar código
+4. Gere o banco de dados:
+
 npx prisma migrate dev --name init
-Rode a aplicação:
 
-bash
-Copiar código
+5. Rode o projeto:
+
 npm run dev
-Usuário Admin
-Para criar um usuário admin, registre um usuário normalmente e depois atualize o perfil dele no banco para "ADMIN" manualmente, ou crie uma rota protegida para isso.
 
-Rotas Principais
-POST /register — Registrar novo usuário comum
+A API ficará disponível em: http://localhost:3000
 
-POST /login — Login e obtenção de token JWT
 
-CRUD /usuarios — Gerenciado por admin
+---
 
-CRUD /filmes — Gerenciado pelo usuário dono ou admin
+🔑 Usuário ADMIN
 
-Testes
-Use ferramentas como Postman ou Insomnia para testar as rotas.
+Você deve criar um usuário com perfil ADMIN manualmente pela rota /register, informando no corpo da requisição:
+
+{
+  "nome": "Admin",
+  "email": "admin@email.com",
+  "senha": "admin123",
+  "perfil": "ADMIN"
+}
+
+Após o cadastro, faça o login com o ADMIN para gerar o token.
+
+
+---
+
+📬 Rotas principais
+
+Método	Rota	Acesso	Descrição
+
+POST	/register	Público	Criação de novo usuário (comum/admin)
+POST	/login	Público	Login e geração do token JWT
+GET	/filmes	Auth	Listar filmes do usuário
+POST	/filmes	Auth	Criar novo filme
+PUT	/filmes/:id	Auth	Atualizar filme
+DELETE	/filmes/:id	Auth	Excluir filme
+GET	/usuarios	Admin	Listar todos os usuários
+PUT	/usuarios/:id	Admin	Atualizar dados de um usuário
+DELETE	/usuarios/:id	Admin	Excluir usuário
+
+
+
+---
+
+🛡️ Proteção por perfil
+
+Usuário comum: acessa apenas seus próprios filmes.
+
+Admin: acessa e gerencia todos os usuários e filmes.
+
+
+
+---
+
+🛉 .gitignore
+
+Já configurado para ignorar:
+
+node_modules/
+
+.env
+
+/prisma/dev.db (ou similar)
+
+outros arquivos temporários.
+
+
+
+---
+
+🔍 Testes via REST Client
+
+Você pode testar os endpoints usando a extensão REST Client no VSCode com o arquivo testes.http.
+
+
+---
+
+📄 Licença
+
+MIT © Rafael Gonçales
