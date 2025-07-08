@@ -1,4 +1,4 @@
-🎜️ API de Filmes Favoritos
+API de Filmes Favoritos
 
 API RESTful para gerenciamento de usuários e seus filmes favoritos, desenvolvida com Node.js, TypeScript, Express, JWT, Prisma e SQLite.
 
@@ -101,13 +101,21 @@ Após o cadastro, faça o login com o ADMIN para gerar o token.
 Método	Rota	Acesso	Descrição
 
 POST	/register	Público	Criação de novo usuário (comum/admin)
+
 POST	/login	Público	Login e geração do token JWT
+
 GET	/filmes	Auth	Listar filmes do usuário
+
 POST	/filmes	Auth	Criar novo filme
+
 PUT	/filmes/:id	Auth	Atualizar filme
+
 DELETE	/filmes/:id	Auth	Excluir filme
+
 GET	/usuarios	Admin	Listar todos os usuários
+
 PUT	/usuarios/:id	Admin	Atualizar dados de um usuário
+
 DELETE	/usuarios/:id	Admin	Excluir usuário
 
 
