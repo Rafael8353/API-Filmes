@@ -1,0 +1,109 @@
+### REGISTRAR USUÁRIO COMUM
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+  "nome": "Usuário Comum",
+  "email": "comum@email.com",
+  "senha": "123456",
+  "perfil": "COMUM"
+}
+
+###
+
+### REGISTRAR USUÁRIO ADMIN
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+  "nome": "Admin User",
+  "email": "admin@email.com",
+  "senha": "admin123",
+  "perfil": "ADMIN"
+}
+
+###
+
+### LOGIN COM USUÁRIO COMUM
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "email": "comum@email.com",
+  "senha": "123456"
+}
+
+###
+
+### LOGIN COM USUÁRIO ADMIN
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "email": "admin@email.com",
+  "senha": "admin123"
+}
+
+###
+
+### CRIAR FILME (use o token do login do usuário comum)
+POST http://localhost:3000/filmes
+Authorization: Bearer {{TOKEN_COMUM}}
+Content-Type: application/json
+
+{
+  "titulo": "Interestelar",
+  "ano": 2014,
+  "descricao": "Viagem espacial e tempo."
+}
+
+###
+
+### LISTAR FILMES (usuário comum)
+GET http://localhost:3000/filmes
+Authorization: Bearer {{TOKEN_COMUM}}
+
+###
+
+### ATUALIZAR FILME (substitua 1 pelo ID real do filme criado)
+PUT http://localhost:3000/filmes/1
+Authorization: Bearer {{TOKEN_COMUM}}
+Content-Type: application/json
+
+{
+  "titulo": "Interestelar Atualizado",
+  "ano": 2015,
+  "descricao": "Viagem no tempo e espaço."
+}
+
+###
+
+### EXCLUIR FILME
+DELETE http://localhost:3000/filmes/1
+Authorization: Bearer {{TOKEN_COMUM}}
+
+###
+
+### LISTAR TODOS OS USUÁRIOS (apenas ADMIN pode)
+GET http://localhost:3000/usuarios
+Authorization: Bearer {{TOKEN_ADMIN}}
+
+###
+
+### ATUALIZAR USUÁRIO COMUM (exemplo: id 2)
+PUT http://localhost:3000/usuarios/2
+Authorization: Bearer {{TOKEN_ADMIN}}
+Content-Type: application/json
+
+{
+  "nome": "Usuário Comum Atualizado",
+  "email": "comum@email.com",
+  "senha": "123456",
+  "perfil": "COMUM"
+}
+
+###
+
+### EXCLUIR USUÁRIO COMUM
+DELETE http://localhost:3000/usuarios/2
+Authorization: Bearer {{TOKEN_ADMIN}}
